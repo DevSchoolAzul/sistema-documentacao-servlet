@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="projeto" var="paginaProjeto" />
+<c:url value="Projetos" var="paginaProjetos" />
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -122,9 +122,9 @@
     </div>
     <div class="overlay">
         <div class="modal-box">
-          <a href="${paginaProjeto}"><button class="btn-close"><span class="lnr lnr-cross"></span></button></a>
+          <a href="${paginaProjetos}"><button class="btn-close"><span class="lnr lnr-cross"></span></button></a>
             <h1>Cadastrar novo projeto</h1>
-            <form class="form-col" method="POST" action="NovoProjeto">
+            <form class="form-col" method="POST" action="InserirProjeto">
                 <div class="form-group">
                     <label for="name">Nome: </label>
                     <input type="text" id="name" name="nome"/>
@@ -138,8 +138,8 @@
                     </select>
                 </div>
                 <div class="btn-group">
-                    <a href="${paginaProjeto }"><button class="btn btn-cancel" type="button">Cancelar</button></a>
-                    <a href="${paginaProjeto }"><button class="btn btn-confirm">Cadastrar</button></a>
+                    <a href="${paginaProjetos }"><button class="btn btn-cancel" type="button">Cancelar</button></a>
+                    <a href="${paginaProjetos }"><button class="btn btn-confirm">Cadastrar</button></a>
                 </div>
               </form>
         </div>

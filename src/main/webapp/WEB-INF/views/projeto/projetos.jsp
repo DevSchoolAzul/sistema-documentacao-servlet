@@ -67,7 +67,7 @@
 
 					<c:forEach items="${projetos }" var="projeto">
 						<div class="box">
-							<a href="versoes?id_projeto=${projeto.id_projeto }" class="project"><p>${projeto.nome }-
+							<a href="Versoes?id_projeto=${projeto.id_projeto }" class="project"><p>${projeto.nome }-
 									${projeto.situacao }</p></a>
 							<div class="btn-manage">
 								<a href="update-project"><span
