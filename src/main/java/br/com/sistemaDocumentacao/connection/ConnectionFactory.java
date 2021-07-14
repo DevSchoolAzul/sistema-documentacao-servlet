@@ -12,7 +12,7 @@ public class ConnectionFactory {
 		Connection connection = null;
 		try {
 			new Driver();
-			connection = DriverManager.getConnection("jdbc:mysql://localhost/sistema_documentacao?useTimezone=true&setTimezone=UTC", "brunno", "13081998");
+			connection = DriverManager.getConnection("jdbc:mysql://localhost/sistema_documentacao?useTimezone=true&setTimezone=UTC", "root", "root");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
