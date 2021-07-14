@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" scope="request" /> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,8 +15,7 @@
 	rel="stylesheet" />
 
 <title>Dashboard</title>
-
-<link rel="stylesheet" href="main.css" />
+<link type="text/css" rel="stylesheet" href="styles/main.css" />
 <link rel="stylesheet"
 	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css" />
 </head>
@@ -24,7 +24,7 @@
 
 		<header class="header-box">
 			<div class="logo-box">
-				<a href="index"><img src="public/mobicare-akross-logo.svg" /></a>
+<!-- 				<a href="index"><img src="public/mobicare-akross-logo.svg" /></a> -->
 			</div>
 			<div class="profile-box">
 				Fulano de Tal <a href="login"><span class="lnr lnr-exit"></span></a>
