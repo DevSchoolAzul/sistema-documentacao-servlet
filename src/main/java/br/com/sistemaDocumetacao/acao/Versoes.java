@@ -19,7 +19,7 @@ public class Versoes implements Acao{
 			throws ServletException, IOException {
 int id_projeto = Integer.valueOf(request.getParameter("id_projeto"));
 		
-		Connection connection = ConnectionFactory.getConnection();
+		Connection connection = new ConnectionFactory().getConnection();
 		VersaoDao dao = new VersaoDao(connection);
 		List<Versao> versoes = dao.listarVersoesDoProjeto(id_projeto);
 		

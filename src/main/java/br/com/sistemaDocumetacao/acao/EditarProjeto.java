@@ -18,7 +18,7 @@ public class EditarProjeto implements Acao {
 			throws ServletException, IOException {
 		int id = Integer.valueOf(request.getParameter("id_projeto"));
 		
-		Connection connection = ConnectionFactory.getConnection();
+		Connection connection = new ConnectionFactory().getConnection();
 		ProjetoDao dao = new ProjetoDao(connection);
 		Projeto projeto = dao.buscarPorId(id);
 		

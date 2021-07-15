@@ -24,7 +24,7 @@ public class AlterarProjeto implements Acao {
 		projeto.setNome(nome);
 		projeto.setSituacao(situacao);
 		
-		Connection connection = ConnectionFactory.getConnection();
+		Connection connection = new ConnectionFactory().getConnection();
 		ProjetoDao dao = new ProjetoDao(connection);
 		dao.atualizar(projeto);
 		

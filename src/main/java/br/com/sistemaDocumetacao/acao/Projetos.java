@@ -17,7 +17,7 @@ public class Projetos implements Acao{
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Connection connection = ConnectionFactory.getConnection();
+		Connection connection = new ConnectionFactory().getConnection();
 		ProjetoDao dao = new ProjetoDao(connection);
 		
 		List<Projeto> projetos = dao.listarProjetos();

@@ -1,6 +1,7 @@
 package br.com.sistemaDocumetacao.acao;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,8 @@ public class InserirProjeto implements Acao {
 		projeto.setNome(nome);
 		projeto.setSituacao(situacao);
 		
-		ProjetoDao dao = new ProjetoDao(ConnectionFactory.getConnection());
+		Connection connection = new ConnectionFactory().getConnection();
+		ProjetoDao dao = new ProjetoDao(connection);
 		dao.cadastrar(projeto);
 		return "redirect:Projetos";
 	}
