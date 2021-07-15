@@ -2,7 +2,6 @@ package br.com.sistemaDocumetacao.acao;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -10,21 +9,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.sistemaDocumentacao.connection.ConnectionFactory;
 import br.com.sistemaDocumentacao.dao.ProjetoDao;
-import br.com.sistemaDocumentacao.modelo.Projeto;
 
-public class Projetos implements Acao{
+public class ExcluirProjeto implements Acao{
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		int id = Integer.valueOf(request.getParameter("id_projeto"));
+		
 		Connection connection = ConnectionFactory.getConnection();
 		ProjetoDao dao = new ProjetoDao(connection);
+		dao.excluir(id);
 		
-		List<Projeto> projetos = dao.listarProjetos();
-		
-		request.setAttribute("projetos", projetos);
-		
-		return "forward:projeto/projetos.jsp";
+		return "redirect:Projetos";
 	}
 
 }

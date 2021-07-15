@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="ctx" value="${pageContext.request.contextPath}" scope="request" /> 
+<c:url value="EditarProjeto" var="editarProjeto" />
+<c:url value="ExcluirProjeto" var="excluirProjeto" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -70,9 +71,9 @@
 							<a href="Versoes?id_projeto=${projeto.id_projeto }" class="project"><p>${projeto.nome }-
 									${projeto.situacao }</p></a>
 							<div class="btn-manage">
-								<a href="update-project"><span
+								<a href="${editarProjeto }?id_projeto=${projeto.id_projeto}"><span
 									class="lnr lnr-pencil btn-manage"></span></a> <a
-									href="confirm-delete-project"><span
+									href="${excluirProjeto }?id_projeto=${projeto.id_projeto}"><span
 									class="lnr lnr-trash btn-manage"></span></a>
 							</div>
 

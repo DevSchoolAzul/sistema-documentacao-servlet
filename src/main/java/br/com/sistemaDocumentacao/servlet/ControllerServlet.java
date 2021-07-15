@@ -37,7 +37,7 @@ public class ControllerServlet extends HttpServlet {
 		
 		String[] tipo_recurso = respostaAcao.split(":");
 		if (tipo_recurso[0].equals("forward")) {
-			request.getRequestDispatcher(tipo_recurso[1]).forward(request, response);
+			request.getRequestDispatcher("WEB-INF/views/" + tipo_recurso[1]).forward(request, response);
 		} else {
 			response.sendRedirect(tipo_recurso[1]);
 		}
