@@ -23,7 +23,7 @@ public class EditarProjeto implements Acao {
 		Projeto projeto = dao.buscarPorId(id);
 		
 		request.setAttribute("projeto", projeto);
-		return "forward:projeto/update-project.jsp";
+		return "forward:projetos/update-project.jsp";
 	}
 
 }

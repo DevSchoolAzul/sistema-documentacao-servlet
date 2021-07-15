@@ -11,7 +11,7 @@ public class NovoProjeto implements Acao {
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		return "forward:projeto/new-project.jsp";
+		return "forward:projetos/new-project.jsp";
 	}
 
 }

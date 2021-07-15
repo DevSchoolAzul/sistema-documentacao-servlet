@@ -1,6 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="Projetos" var="paginaProjetos" />
-<c:url value="AlterarProjeto" var="atualizarProjeto" />
+<c:url value="entrada?acao=Projetos" var="paginaProjetos" />
+<c:url value="entrada?acao=AlterarProjeto" var="atualizarProjeto" />
 
 <!DOCTYPE html>
 <html lang="en">

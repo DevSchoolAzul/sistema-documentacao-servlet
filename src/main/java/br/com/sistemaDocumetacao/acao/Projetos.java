@@ -24,7 +24,7 @@ public class Projetos implements Acao{
 		
 		request.setAttribute("projetos", projetos);
 		
-		return "forward:projeto/projetos.jsp";
+		return "forward:projetos/projetos.jsp";
 	}
 
 }

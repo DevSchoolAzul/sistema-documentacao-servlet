@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="EditarProjeto" var="editarProjeto" />
-<c:url value="ExcluirProjeto" var="excluirProjeto" />
+<c:url value="entrada?acao=EditarProjeto" var="editarProjeto" />
+<c:url value="entrada?acao=ExcluirProjeto" var="excluirProjeto" />
+<c:url value="entrada?acao=NovoProjeto" var="novoProjeto" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +17,7 @@
 	rel="stylesheet" />
 
 <title>Dashboard</title>
-<link type="text/css" rel="stylesheet" href="styles/main.css" />
+<link rel="stylesheet" href="styles/main.css" />
 <link rel="stylesheet"
 	href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css" />
 </head>
@@ -55,7 +56,7 @@
 								<option value="2">Inativo</option>
 							</select>
 						</div>
-						<a href="NovoProjeto">
+						<a href="${novoProjeto }">
 							<button class="btn btn-create">
 								<span class="lnr lnr-file-add"></span>Cadastro
 							</button>
@@ -68,12 +69,12 @@
 
 					<c:forEach items="${projetos }" var="projeto">
 						<div class="box">
-							<a href="Versoes?id_projeto=${projeto.id_projeto }" class="project"><p>${projeto.nome }-
+							<a href="entrada?acao=Versoes&id_projeto=${projeto.id_projeto }" class="project"><p>${projeto.nome }-
 									${projeto.situacao }</p></a>
 							<div class="btn-manage">
-								<a href="${editarProjeto }?id_projeto=${projeto.id_projeto}"><span
+								<a href="${editarProjeto }&id_projeto=${projeto.id_projeto}"><span
 									class="lnr lnr-pencil btn-manage"></span></a> <a
-									href="${excluirProjeto }?id_projeto=${projeto.id_projeto}"><span
+									href="${excluirProjeto }&id_projeto=${projeto.id_projeto}"><span
 									class="lnr lnr-trash btn-manage"></span></a>
 							</div>
 

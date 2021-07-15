@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="Projetos" var="paginaProjetos" />
+<c:url value="entrada?acao=Projetos" var="paginaProjetos" />
+<c:url value="entrada?acao=InserirProjeto" var="inserirProjeto" />
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -124,7 +125,7 @@
         <div class="modal-box">
           <a href="${paginaProjetos}"><button class="btn-close"><span class="lnr lnr-cross"></span></button></a>
             <h1>Cadastrar novo projeto</h1>
-            <form class="form-col" method="POST" action="InserirProjeto">
+            <form class="form-col" method="POST" action="${inserirProjeto }">
                 <div class="form-group">
                     <label for="name">Nome: </label>
                     <input type="text" id="name" name="nome"/>

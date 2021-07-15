@@ -14,7 +14,7 @@ import br.com.sistemaDocumetacao.acao.Acao;
 /**
  * Servlet implementation class ControllerServlet
  */
-@WebServlet("/")
+@WebServlet("/entrada")
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -22,12 +22,13 @@ public class ControllerServlet extends HttpServlet {
 	 * @see HttpServlet#service(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String url = request.getServletPath().substring(1);
+		
+		String paramAcao = request.getParameter("acao");
 		
 		Class<?> clase;
 		String respostaAcao;
 		try {
-			clase = Class.forName("br.com.sistemaDocumetacao.acao." + url);
+			clase = Class.forName("br.com.sistemaDocumetacao.acao." + paramAcao);
 			Acao acao = (Acao) clase.getDeclaredConstructor().newInstance();
 			respostaAcao = acao.executa(request, response);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
@@ -37,9 +38,9 @@ public class ControllerServlet extends HttpServlet {
 		
 		String[] tipo_recurso = respostaAcao.split(":");
 		if (tipo_recurso[0].equals("forward")) {
-			request.getRequestDispatcher("WEB-INF/views/" + tipo_recurso[1]).forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/" + tipo_recurso[1]).forward(request, response);
 		} else {
-			response.sendRedirect(tipo_recurso[1]);
+			response.sendRedirect("entrada?acao=" + tipo_recurso[1]);
 		}
 	}
 

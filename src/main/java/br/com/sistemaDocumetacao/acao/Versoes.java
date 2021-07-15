@@ -25,7 +25,7 @@ int id_projeto = Integer.valueOf(request.getParameter("id_projeto"));
 		
 		request.setAttribute("versoes", versoes);
 		
-		return "forward:versao/versoes.jsp"; 
+		return "forward:versoes/versoes.jsp"; 
 	}
 
 }
