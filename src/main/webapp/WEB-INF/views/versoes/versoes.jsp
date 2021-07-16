@@ -1,3 +1,10 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<c:url value="entrada?acao=Telas" var="linkTelas" />
+<c:url value="entrada?acao=EditarVersao" var="atualizarVersoes" />
+<c:url value="entrada?acao=ExcluirVersao" var="excluirVersao" />
+<c:url value="entrada?acao=Projetos" var="paginaProjetos" />
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <title>VersÃ£o</title>
+  <title>Versão</title>
 
   <link rel="stylesheet" href="styles/main.css" />
   <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css" />
@@ -31,8 +38,8 @@
         <div class="title-bar">
           <div class="title-content">
             <ul class="bd-group">
-              <li><a href="index">Projetos</a></li>
-              <li><a href="version">VersÃ£o</a></li>
+              <li><a href="${paginaProjetos }">${projeto.nome }</a></li>
+              <li><a href="#">Versão</a></li>
             </ul>
             <a href="new-version">
               <button class="btn btn-create">
@@ -45,64 +52,29 @@
           <table class="list">
             <thead class="list-header">
               <tr>
-                <th>NÃºmero</th>
-                <th>Data de lanÃ§amento</th>
-                <th>NÃºmero do GMUD</th>
+                <th>Número</th>
+                <th>Data de lançamento</th>
+                <th>Número do GMUD</th>
                 <th>Total Func.</th>
-                <th>AÃ§Ãµes</th>
+                <th>Ações</th>
               </tr>
             </thead>
             <tbody class="list-body">
-              <tr>
-                <td><a href="screen">#1</a></td>
-                <td><a href="screen">23/03/2019</a></td>
-                <td><a href="screen">12345</a></td>
-                <td><a href="screen">10</a></td>
-                <td>
-                  <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-                  <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="screen">#2</a></td>
-                <td><a href="screen">28/03/2019</a></td>
-                <td><a href="screen">12346</a></td>
-                <td><a href="screen">13</a></td>
-                <td>
-                  <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-                  <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="screen">#3</a></td>
-                <td><a href="screen">05/04/2019</a></td>
-                <td><a href="screen">12347</a></td>
-                <td><a href="screen">18</a></td>
-                <td>
-                  <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-                  <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="screen">#4</a></td>
-                <td><a href="screen">11/12/2019</a></td>
-                <td><a href="screen">12348</a></td>
-                <td><a href="screen">24</a></td>
-                <td>
-                  <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-                  <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-                </td>
-              </tr>
-              <tr>
-                <td><a href="screen">#5</a></td>
-                <td><a href="screen">01/02/2020</a></td>
-                <td><a href="screen">12349</a></td>
-                <td><a href="screen">30</a></td>
-                <td>
-                  <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-                  <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-                </td>
-              </tr>
+             
+            <c:forEach items="${versoes}" var="versao">
+            <c:url value="${linkTelas}&id_versao=${versao.id_versao}" var="tela" />
+	            	<tr>
+	            		<td><a href="${tela}">${versao.id_versao}</a></td>
+	            		<td><a href="${tela}">${versao.data_lancamento}</a></td>
+	            		<td><a href="${tela}">${versao.gmud}</a></td>
+	            		<td><a href="${tela}">total de func</a></td>
+	            		<td>
+		                  <a href="${atualizarVersao }&id_versao=${versao.id_versao}"><span class="lnr lnr-pencil btn-manage"></span></a>
+		                  <a href="${excluirVersao }&id_versao=${versao.id_versao}"><span class="lnr lnr-trash btn-manage"></span></a>
+		                </td>
+	            	<tr>
+            </c:forEach>
+              
             </tbody>
           </table>
         </div>
