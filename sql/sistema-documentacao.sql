@@ -100,4 +100,3 @@ alter table evento add constraint fk_evento_tela_id_tela foreign key (id_tela) r
 alter table evento add constraint fk_evento_tipo_evento_id_tipo_evento foreign key (id_tipo_evento) references tipo_evento(id_tipo_evento);
 alter table requisicao add constraint fk_requisicao_evento_id_evento foreign key (id_evento) references evento(id_evento);
 alter table propriedade add constraint fk_propriedade_requisicao_id_requisicao foreign key (id_requisicao) references requisicao(id_requisicao);
-alter table versao drop constraint fk_versao_projero_id_projeto;
