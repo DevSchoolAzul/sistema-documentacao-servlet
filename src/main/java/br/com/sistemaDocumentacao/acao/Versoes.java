@@ -1,27 +1,31 @@
-package br.com.sistemaDocumetacao.acao;
+package br.com.sistemaDocumentacao.acao;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.sistemaDocumentacao.connection.ConnectionFactory;
-import br.com.sistemaDocumentacao.dao.ProjetoDao;
+import br.com.sistemaDocumentacao.dao.VersaoDao;
+import br.com.sistemaDocumentacao.modelo.Versao;
 
-public class ExcluirProjeto implements Acao{
+public class Versoes implements Acao{
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int id = Integer.valueOf(request.getParameter("id_projeto"));
+int id_projeto = Integer.valueOf(request.getParameter("id_projeto"));
 		
 		Connection connection = new ConnectionFactory().getConnection();
-		ProjetoDao dao = new ProjetoDao(connection);
-		dao.excluir(id);
+		VersaoDao dao = new VersaoDao(connection);
+		List<Versao> versoes = dao.listarVersoesDoProjeto(id_projeto);
 		
-		return "redirect:Projetos";
+		request.setAttribute("versoes", versoes);
+		
+		return "forward:versoes/versoes.jsp"; 
 	}
 
 }

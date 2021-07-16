@@ -1,4 +1,4 @@
-package br.com.sistemaDocumetacao.acao;
+package br.com.sistemaDocumentacao.acao;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -11,20 +11,23 @@ import br.com.sistemaDocumentacao.connection.ConnectionFactory;
 import br.com.sistemaDocumentacao.dao.ProjetoDao;
 import br.com.sistemaDocumentacao.modelo.Projeto;
 
-public class InserirProjeto implements Acao {
+public class AlterarProjeto implements Acao {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		int id = Integer.valueOf(request.getParameter("id_projeto"));
 		String nome = request.getParameter("nome");
 		boolean situacao = request.getParameter("situacao").equals("1");
 		Projeto projeto = new Projeto();
+		projeto.setId_projeto(id);
 		projeto.setNome(nome);
 		projeto.setSituacao(situacao);
 		
 		Connection connection = new ConnectionFactory().getConnection();
 		ProjetoDao dao = new ProjetoDao(connection);
-		dao.cadastrar(projeto);
+		dao.atualizar(projeto);
+		
 		return "redirect:Projetos";
 	}
 

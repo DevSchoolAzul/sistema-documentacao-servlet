@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.sistemaDocumetacao.acao.Acao;
+import br.com.sistemaDocumentacao.acao.Acao;
 
 /**
  * Servlet implementation class ControllerServlet
@@ -28,7 +28,7 @@ public class ControllerServlet extends HttpServlet {
 		Class<?> clase;
 		String respostaAcao;
 		try {
-			clase = Class.forName("br.com.sistemaDocumetacao.acao." + paramAcao);
+			clase = Class.forName("br.com.sistemaDocumentacao.acao." + paramAcao);
 			Acao acao = (Acao) clase.getDeclaredConstructor().newInstance();
 			respostaAcao = acao.executa(request, response);
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException

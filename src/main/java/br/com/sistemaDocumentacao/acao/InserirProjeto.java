@@ -1,8 +1,7 @@
-package br.com.sistemaDocumetacao.acao;
+package br.com.sistemaDocumentacao.acao;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,19 +11,21 @@ import br.com.sistemaDocumentacao.connection.ConnectionFactory;
 import br.com.sistemaDocumentacao.dao.ProjetoDao;
 import br.com.sistemaDocumentacao.modelo.Projeto;
 
-public class Projetos implements Acao{
+public class InserirProjeto implements Acao {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String nome = request.getParameter("nome");
+		boolean situacao = request.getParameter("situacao").equals("1");
+		Projeto projeto = new Projeto();
+		projeto.setNome(nome);
+		projeto.setSituacao(situacao);
+		
 		Connection connection = new ConnectionFactory().getConnection();
 		ProjetoDao dao = new ProjetoDao(connection);
-		
-		List<Projeto> projetos = dao.listarProjetos();
-		
-		request.setAttribute("projetos", projetos);
-		
-		return "forward:projetos/projetos.jsp";
+		dao.cadastrar(projeto);
+		return "redirect:Projetos";
 	}
 
 }

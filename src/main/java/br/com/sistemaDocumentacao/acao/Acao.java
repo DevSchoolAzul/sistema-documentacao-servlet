@@ -1,4 +1,4 @@
-package br.com.sistemaDocumetacao.acao;
+package br.com.sistemaDocumentacao.acao;
 
 import java.io.IOException;
 

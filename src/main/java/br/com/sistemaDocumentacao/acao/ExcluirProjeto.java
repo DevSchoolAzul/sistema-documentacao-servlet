@@ -1,4 +1,4 @@
-package br.com.sistemaDocumetacao.acao;
+package br.com.sistemaDocumentacao.acao;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.sistemaDocumentacao.connection.ConnectionFactory;
 import br.com.sistemaDocumentacao.dao.ProjetoDao;
-import br.com.sistemaDocumentacao.modelo.Projeto;
 
-public class EditarProjeto implements Acao {
+public class ExcluirProjeto implements Acao{
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
@@ -20,10 +19,9 @@ public class EditarProjeto implements Acao {
 		
 		Connection connection = new ConnectionFactory().getConnection();
 		ProjetoDao dao = new ProjetoDao(connection);
-		Projeto projeto = dao.buscarPorId(id);
+		dao.excluir(id);
 		
-		request.setAttribute("projeto", projeto);
-		return "forward:projetos/update-project.jsp";
+		return "redirect:Projetos";
 	}
 
 }
