@@ -1,5 +1,85 @@
 package br.com.sistemaDocumentacao.dao;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import br.com.sistemaDocumentacao.modelo.Evento;
+
 public class EventoDao {
+
+	private Connection connection;
+	
+	public EventoDao(Connection connection) {
+		this.connection = connection;
+	}
+	
+	public void cadastrar(Evento evento) {
+		String sql = "INSERT INTO evento ("
+				+ "id_tipo_evento, id_tela, situacao , ordem, parametros) "
+				+ "values (?, ?, ?, ?, ?)";
+		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.setInt(1, evento.getId_tipo_evento());
+			pstm.setInt(2, evento.getId_tela());
+			pstm.setBoolean(3, evento.isSituacao());
+			pstm.setInt(4, evento.getOrdem());
+			pstm.setString(5, evento.getParametros());
+			pstm.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void atualizar(Evento evento) {
+		String sql = "UPDATE evento SET id_tipo_evento = ?, id_tela = ?, "
+				+ "situacao = ?, ordem = ?, parametros = ?"
+				+ " WHERE id_Evento = ?";
+		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.setInt(1, evento.getId_tipo_evento());
+			pstm.setInt(2, evento.getId_tela());
+			pstm.setBoolean(3, evento.isSituacao());
+			pstm.setInt(4, evento.getOrdem());
+			pstm.setString(5, evento.getParametros());
+			pstm.setInt(6, evento.getOrdem());
+			pstm.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public void excluir(int id_evento) {
+		String sql = "DELETE FROM evento WHERE id_evento = ?";
+		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.setInt(1, id_evento);
+			pstm.execute();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public Evento buscar(int id) {
+		String sql = "SELECT id_tipo_evento, id_tela, situacao, ordem, parametros"
+				+ " FROM evento WHERE id_evento = ?";
+		Evento evento = null;
+		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.setInt(1, id);
+			pstm.execute();
+			try(ResultSet result = pstm.getResultSet()) {
+				while(result.next()) {
+					evento = new Evento();
+					evento.setId_evento(id);
+					evento.setId_tipo_evento(result.getInt(1));
+					evento.setId_tela(result.getInt(2));
+					evento.setSituacao(result.getBoolean(3));
+					evento.setOrdem(result.getInt(4));
+					evento.setParametros(result.getString(5));
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return evento;
+	}
 
 }
