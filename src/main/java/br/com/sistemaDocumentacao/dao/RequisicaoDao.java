@@ -18,14 +18,18 @@ public class RequisicaoDao {
 	}
 
 	public void cadastrar(Requisicao requisicao) {
-		String sql = "INSERT INTO REQUISICAO (id_evento, url_homolog, uri_prod, descricao, requisicao_pai, camada, situacao, ordem)"
+		String sql = "INSERT INTO requisicao (id_evento, url_homolog, uri_prod, descricao, requisicao_pai, camada, situacao, ordem)"
 				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.setInt(1, requisicao.getId_evento());
 			pstm.setString(2, requisicao.getUrl_homolog());
 			pstm.setString(3, requisicao.getUri_prod());
 			pstm.setString(4, requisicao.getDescricao());
-			pstm.setInt(5, requisicao.getRequisicao_pai());
+			if (requisicao.getRequisicao_pai() == null) {
+				pstm.setNull(5, 0);
+			} else {
+				pstm.setInt(5, requisicao.getRequisicao_pai());				
+			}
 			pstm.setString(6, requisicao.getCamada());
 			pstm.setBoolean(7, requisicao.isSituacao());
 			pstm.setInt(8, requisicao.getOrdem());
@@ -64,15 +68,20 @@ public class RequisicaoDao {
 	}
 
 	public void atualizar(Requisicao requisicao) {
-		String sql = "UPDATE requisicao SET url_homolog = ?, uri_prod = ?, descricao = ?, requisicao_pai = ?, camada = ?, situacao = ?, ordem = ? WHERE id_projeto = ?";
+		String sql = "UPDATE requisicao SET url_homolog = ?, uri_prod = ?, descricao = ?, requisicao_pai = ?, camada = ?, situacao = ?, ordem = ? WHERE id_evento = ?";
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.setString(1, requisicao.getUrl_homolog());
 			pstm.setString(2, requisicao.getUri_prod());
 			pstm.setString(3, requisicao.getDescricao());
-			pstm.setInt(4, requisicao.getRequisicao_pai());
+			if (requisicao.getRequisicao_pai() == null) {
+				pstm.setNull(4, 0);
+			} else {
+				pstm.setInt(4, requisicao.getRequisicao_pai());				
+			}
 			pstm.setString(5, requisicao.getCamada());
 			pstm.setBoolean(6, requisicao.isSituacao());
 			pstm.setInt(7, requisicao.getOrdem());
+			pstm.setInt(8, requisicao.getId_evento());
 			pstm.execute();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -80,7 +89,7 @@ public class RequisicaoDao {
 	}
 
 	public void excluir(Requisicao requisicao) {
-		String sql = "DELETE FRMO REQUISICAO WHERE ID_REQUISICAO = ?";
+		String sql = "DELETE FROM requisicao WHERE ID_REQUISICAO = ?";
 
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.setInt(1, requisicao.getId_requisicao());
@@ -94,7 +103,7 @@ public class RequisicaoDao {
 
 		List<Requisicao> requisicoes = new ArrayList<>();
 
-		String sql = "SELECT * FROM REQUISICAO WHERE ID_EVENTO = ?";
+		String sql = "SELECT * FROM requisicao WHERE ID_EVENTO = ?";
 
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.setInt(1, id_evento);
