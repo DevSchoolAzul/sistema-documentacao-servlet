@@ -24,15 +24,9 @@
 
 <body>
   <div id="container">
-    <header class="header-box">
-      <div class="logo-box">
-        <a href="index"><img src="public/mobicare-akross-logo.svg" /></a>
-      </div>
-      <div class="profile-box">
-        Fulano de Tal
-        <a href="login"><span class="lnr lnr-exit"></span></a>
-      </div>
-    </header>
+    
+    <c:import url="/components/header.jsp" />
+    
     <div class="container">
       <div class="table">
         <div class="title-bar">

@@ -23,17 +23,9 @@
     />
   </head>
   <body id="page-login">
-    <div id="container">
-      <header class="header-box">
-        <div class="logo-box">
-          <a href="index"><img src="public/mobicare-akross-logo.svg" /></a>
-        </div>
-        <div class="profile-box">
-          Fulano de Tal
-          <a href="login"><span class="lnr lnr-exit"></span></a>
-        </div>
-      </header>
-    </div>
+    
+    <c:import url="/components/header.jsp" />
+    
     <div class="container">
       <div class="table">
         <div class="title-bar">
@@ -61,64 +53,11 @@
             </a>
           </div>
         </div>
-        <div class="boxes">
-          <div class="box">
-            <a href="version" class="project"><p>Projeto 1</p></a>
-            <div class="btn-manage">
-              <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-              <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-            </div>
-          </div>
-          <div class="box">
-            <a href="version" class="project"><p>Projeto 2</p></a>
-            <div class="btn-manage">
-              <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-              <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-            </div>
-          </div>
-          <div class="box">
-            <a href="version" class="project"><p>Projeto 3</p></a>
-            <div class="btn-manage">
-              <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-              <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-            </div>
-          </div>
-          <div class="box">
-            <a href="version" class="project"><p>Projeto 4</p></a>
-            <div class="btn-manage">
-              <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-              <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-            </div>
-          </div>
-          <div class="box">
-            <a href="version" class="project"><p>Projeto 5</p></a>
-            <div class="btn-manage">
-              <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-              <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-            </div>
-          </div>
-          <div class="box">
-            <a href="version" class="project"><p>Projeto 6</p></a>
-            <div class="btn-manage">
-              <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-              <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-            </div>
-          </div>
-          <div class="box">
-            <a href="version" class="project"><p>Projeto com nome grande</p></a>
-            <div class="btn-manage">
-              <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-              <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-            </div>
-          </div>
-          <div class="box">
-            <a href="version" class="project"><p>Projeto 8</p></a>
-            <div class="btn-manage">
-              <a href="update-version"><span class="lnr lnr-pencil btn-manage"></span></a>
-              <a href="confirm-delete-version"><span class="lnr lnr-trash btn-manage"></span></a>
-            </div>
-          </div>
-        </div>
+       
+       
+       <c:import url="/components/camposFake.jsp" />
+       
+       
       </div>
     </div>
     <div class="overlay">
@@ -133,8 +72,7 @@
                 <div class="form-group">
                     <label for="status">Estado: </label>
                     <select class="input-drop" name="situacao" id="status">
-                        <option value="">---</option>
-                        <option value="1">Ativo</option>
+                        <option value="1" selected>Ativo</option>
                         <option value="0">Inativo</option>
                     </select>
                 </div>
