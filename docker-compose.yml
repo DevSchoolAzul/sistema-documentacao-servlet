@@ -1,0 +1,16 @@
+version: '3'
+services:
+  mysql:
+    container_name: mysqlsd
+    image: mysql
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - "3307:3306"
+    expose:
+      - '3306'
+    volumes:
+      - /data/database:/var/lib/mysql
+      - ./sql:/var/www
