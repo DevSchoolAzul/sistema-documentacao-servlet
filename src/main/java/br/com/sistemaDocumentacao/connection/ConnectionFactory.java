@@ -16,9 +16,9 @@ public class ConnectionFactory {
 		try {
 			ComboPooledDataSource combo = new ComboPooledDataSource();
 			combo.setDriverClass("com.mysql.cj.jdbc.Driver");
-			combo.setJdbcUrl("jdbc:mysql://localhost/sistema_documentacao?useTimezone=true&setTimezone=UTC");
+			combo.setJdbcUrl("jdbc:mysql://localhost:3307/sistema_documentacao?useTimezone=true&setTimezone=UTC");
 			combo.setUser("root");
-			combo.setPassword("root");
+			combo.setPassword("password");
 			this.combo = combo;
 		} catch (PropertyVetoException e) {
 			throw new RuntimeException("Erro ao setar o driver do banco de dados. " + e);
