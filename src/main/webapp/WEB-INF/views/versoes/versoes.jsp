@@ -60,13 +60,12 @@
 						<tbody class="list-body">
 
 <c:forEach items="${versoes}" var="versao">
-	<c:url value="${linkTelas}&id_versao=${versao.id_versao}"
-		var="tela" />
+	<c:url value="${linkTelas }&id_versao=${versao.id_versao }" var="paginaTelas" />
 	<tr>
-		<td><a href="${tela}">${versao.numero_versao}</a></td>
-		<td><a href="${tela}">${versao.data_lancamento}</a></td>
-		<td><a href="${tela}">${versao.gmud}</a></td>
-		<td><a href="${tela}">total de func</a></td>
+		<td><a href="${paginaTelas}">${versao.numero_versao}</a></td>
+		<td><a href="${paginaTelas}">${versao.data_lancamento}</a></td>
+		<td><a href="${paginaTelas}">${versao.gmud}</a></td>
+		<td><a href="${paginaTelas}">total de func</a></td>
 		<td><a
 			href="${atualizarVersao }&id_versao=${versao.id_versao}"><span
 				class="lnr lnr-pencil btn-manage"></span></a> <a
