@@ -5,97 +5,95 @@ import java.time.LocalDate;
 //(Id_tela,Id_versao,Data_Cadastro,Nome_Tela,Imagem,Situacao,Tela_Pai,Ordem,Url_log,Versao_Origem)
 public class Tela {
 
-	private int Id_tela;
-	private int Id_versao;
-	private LocalDate Data_Cadastro;
-	private String Nome_Tela;
-	private String Imagem;
-	private boolean Situacao;
-	private int Tela_Pai;
-	private int Ordem;
-	private String Url_log;
-	private int Versao_Origem;
+	private int idTela;
+	private int idVersao;
+	private LocalDate dataCadastro;
+	private String nomeTela;
+	private String imagem;
+	private boolean situacao;
+	private int telaPai;
+	private int ordem;
+	private String urlLog;
+	private int versaoOrigem;
 
-	// metodos get e set
-
-	public int getId_tela() {
-		return Id_tela;
+	public int getIdTela() {
+		return idTela;
 	}
 
-	public void setId_tela(int id_tela) {
-		Id_tela = id_tela;
+	public void setIdTela(int idTela) {
+		this.idTela = idTela;
 	}
 
-	public int getId_versao() {
-		return Id_versao;
+	public int getIdVersao() {
+		return idVersao;
 	}
 
-	public void setId_versao(int id_versao) {
-		Id_versao = id_versao;
+	public void setIdVersao(int idVersao) {
+		this.idVersao = idVersao;
 	}
 
-	public String getNome_Tela() {
-		return Nome_Tela;
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
 	}
 
-	public void setNome_Tela(String nome_Tela) {
-		Nome_Tela = nome_Tela;
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
+	public String getNomeTela() {
+		return nomeTela;
+	}
+
+	public void setNomeTela(String nomeTela) {
+		this.nomeTela = nomeTela;
 	}
 
 	public String getImagem() {
-		return Imagem;
+		return imagem;
 	}
 
 	public void setImagem(String imagem) {
-		Imagem = imagem;
+		this.imagem = imagem;
 	}
 
 	public boolean isSituacao() {
-		return Situacao;
+		return situacao;
 	}
 
 	public void setSituacao(boolean situacao) {
-		Situacao = situacao;
+		this.situacao = situacao;
 	}
 
-	public int getTela_Pai() {
-		return Tela_Pai;
+	public int getTelaPai() {
+		return telaPai;
 	}
 
-	public void setTela_Pai(int tela_Pai) {
-		Tela_Pai = tela_Pai;
+	public void setTelaPai(int telaPai) {
+		this.telaPai = telaPai;
 	}
 
 	public int getOrdem() {
-		return Ordem;
+		return ordem;
 	}
 
 	public void setOrdem(int ordem) {
-		Ordem = ordem;
+		this.ordem = ordem;
 	}
 
-	public String getUrl_log() {
-		return Url_log;
+	public String getUrlLog() {
+		return urlLog;
 	}
 
-	public void setUrl_log(String url_log) {
-		Url_log = url_log;
+	public void setUrlLog(String urlLog) {
+		this.urlLog = urlLog;
 	}
 
-	public int getVersao_Origem() {
-		return Versao_Origem;
+	public int getVersaoOrigem() {
+		return versaoOrigem;
 	}
 
-	public void setVersao_Origem(int versao_Origem) {
-		Versao_Origem = versao_Origem;
-	}
-
-	public void setData_Cadastro(LocalDate data_Cadastro) {
-		Data_Cadastro = data_Cadastro;
-	}
-
-	public LocalDate getData_Cadastro() {
-		return Data_Cadastro;
+	public void setVersaoOrigem(int versaoOrigem) {
+		this.versaoOrigem = versaoOrigem;
 	}
 
 }
