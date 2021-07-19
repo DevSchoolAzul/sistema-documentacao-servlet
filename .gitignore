@@ -2,6 +2,9 @@
 
 target/m2e-wtp/web-resources/META-INF/maven/br.com.sitema-documentacao/sistema-documentacao/pom.properties
 
+.classpath
+.project
+.settings/
 
 # Compiled class file
 *.class
