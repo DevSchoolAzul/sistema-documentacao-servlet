@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url />
-<c:url />
+<c:url value="entrada?acao=Versoes&id_projeto=${projeto.id_projeto }" var="paginaVersoes"/>
+<c:url value="entrada?acao=InserirVersao" var="cadastrarVersao"/>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -54,81 +54,71 @@
               </tr>
             </thead>
             <tbody class="list-body">
-            <c:forEach items="${versoes}" var="versao">
-            	<a href="${linkTelas}&id_versao=${versao.id_versao}">
-	            	<tr>
-	            		<td>${versao.id_versao}</td>
-	            		<td>${versao.data_lancamento}</td>
-	            		<td>${versao.gmud}</td>
-	            		<td>total de func</td>
-	            		<td>
-		                  <a href="${atualizarVersao }&id_versao=${versao.id_versao}"><span class="lnr lnr-pencil btn-manage"></span></a>
-		                  <a href="${excluirVersao }&id_versao=${versao.id_versao}"><span class="lnr lnr-trash btn-manage"></span></a>
-		                </td>
-	            	<tr>
-            	</a>
-            </c:forEach>
+           
           </table>
         </div>
       </div>
     </div>
+    
+    
     <div class="overlay">
-        <div class="modal-box">
-          <a href="version"><button class="btn-close"><span class="lnr lnr-cross"></span></button></a>
-            <h1>Cadastrar nova versão</h1>
+        <form class="modal-box" action="${cadastrarVersao }" method="POST">
+        	<a href="${paginaVersoes }"><button class="btn-close" type="button"><span class="lnr lnr-cross"></span></button></a>
+        	<h1>Cadastrar nova versão</h1>
             <div class="form-col">
                 <div class="form-row">
-            <form class="form-col">
-                <div class="form-group">
-                    <label for="project">Projeto:</label>
-                    <select class="input-drop" name="project" id="project">
-                        <option value="">---</option>
-                        <option value="1">Ativo</option>
-                        <option value="2">Inativo</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="date">Data de lançamento:</label>
-                    <input type="date" id="date"/>
-                </div>
-                <div class="form-group">
-                    <label for="gmud">Número da GMUD:</label>
-                    <input type="text" id="gmud"/>
-                </div>
-            </form>
-            <form class="form-col">
-                <div class="form-group">
-                    <label for="version">Número da versão:</label>
-                    <input type="text" id="version"/>
-                </div>
-                <div class="form-group">
-                        <label for="clone">Clonar de outra versão: </label>
-                        <select class="input-drop" name="clone" id="clone">
-                            <option value="">---</option>
-                            <option value="1">Ativo</option>
-                            <option value="2">Inativo</option>
-                        </select>
-                </div>
-                    <div class="form-group">
-                        <label for="status">Estado:</label>
-                        <select class="input-drop" name="status" id="status">
-                            <option value="">---</option>
-                            <option value="1">Ativo</option>
-                            <option value="2">Inativo</option>
-                        </select>
-                    </div>
-            </form>
+            		<div class="form-col">
+                		<div class="form-group">
+           			        <label for="project">Projeto:</label>
+                    		<select class="input-drop" name="id_projeto" id="project">
+                        		<c:forEach items="${projetos}" var="projeto">
+                        		<option value="${projeto.id_projeto }">${projeto.nome }</option>
+                      			</c:forEach>
+                    		</select>
+                		</div>
+                		<div class="form-group">
+                    		<label for="date">Data de lan�amento:</label>
+                    		<input type="date" id="date" name="data_lancamento"/>
+                		</div>
+                		<div class="form-group">
+		                    <label for="gmud">N�mero da GMUD:</label>
+		                    <input type="text" id="gmud" name="gmud"/>
+		                </div>
+		            </div>
+	           		<div class="form-col">
+	                	<div class="form-group">
+		                    <label for="version">N�mero da versão:</label>
+		                    <input type="text" id="version" name="numero_versao"/>
+	                	</div>
+	                	<div class="form-group">
+	                        <label for="clone">Clonar de outra versão: </label>
+	                        <select class="input-drop" name="id_clone" id="clone">
+	                        <c:forEach items="${versoes}" var="versao"></c:forEach>
+	                            <option value="${versao.id_versao }">${versao.numero_versao }</option>
+	                        </select>
+	                	</div>
+	                    <div class="form-group">
+	                        <label for="status">Estado:</label>
+	                        <select class="input-drop" name="situacao" id="status">
+	                            <option value="1">Ativo</option>
+	                            <option value="2">Inativo</option>
+	                        </select>
+	                    </div>
+	            	</div>
+            	</div>
+	            <div class="form-group textarea">
+	                <label for="description">Descri��o:</label>
+	                <textarea id="description" nome="descricao"></textarea>
+	            </div>
+	            <div class="btn-group">
+	                <a href="${paginaVersoes }"><button class="btn btn-cancel" type="button">Cancelar</button></a>
+	                <a><button class="btn btn-confirm">Cadastrar</button></a>
+	            </div>
             </div>
-            <div class="form-group textarea">
-                <label for="description">Descrição:</label>
-                <textarea id="description"></textarea>
-            </div>
-            <div class="btn-group">
-                <a href="version"><button class="btn btn-cancel">Cancelar</button></a>
-                <a href="version"><button class="btn btn-confirm">Cadastrar</button><a>
-            </div>
-        </div>
-    </div>
+   		</form>    
+    
+    
+    
         </div>
     </div> 
   </body>

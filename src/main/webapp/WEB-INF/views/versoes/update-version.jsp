@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="entrada?acao=Versoes&id_projeto=${versao.id_projeto }" var="paginaVersoes" />
-<c:url value="entrada?acao=AtualizarVersao" var="atualizarVersao" />
 
+<c:url value="entrada?acao=Versoes&id_projeto=${versao.id_projeto }" var="paginaVersoes" />
+<c:url value="entrada?acao=AlterarVersao" var="atualizarVersao" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -110,12 +110,16 @@
         </div>
       </div>
     </div>
+    
+    
+    
     <div class="overlay">
         <div class="modal-box">
           <a href="${paginaVersoes }"><button class="btn-close"><span class="lnr lnr-cross"></span></button></a>
             <h1>Alterar versãoo</h1>
             <h2>Projeto ${projeto.nome } / Versão ${versao.numero_versao}</h2>
             <form class="form-col" action="${atualizarVersao}" method="POST">
+            	<input type="hidden" value="${versao.id_versao }" name="id_versao"/>
                 <div class="form-row">
                     <div class="form-col">
                         <div class="form-group">
@@ -134,7 +138,7 @@
                         </div>
                         <div class="form-group">
                             <label for="status">Estado:</label>
-                            <select class="input-drop" name="status" id="status">
+                            <select class="input-drop" name="situacao" id="status">
                             	<c:if test="${versao.situacao == true }">
  	                            	<option value="1" selected>Ativo</option>
     	                        	<option value="2">Inativo</option>
@@ -158,6 +162,8 @@
             </form>
         </div>
     </div>
+    
+    
     
   </body>
 </html>

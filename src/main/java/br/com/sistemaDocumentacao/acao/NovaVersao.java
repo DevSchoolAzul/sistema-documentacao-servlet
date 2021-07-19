@@ -15,25 +15,28 @@ import br.com.sistemaDocumentacao.dao.VersaoDao;
 import br.com.sistemaDocumentacao.modelo.Projeto;
 import br.com.sistemaDocumentacao.modelo.Versao;
 
-public class Versoes implements Acao {
+public class NovaVersao implements Acao {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int id_projeto = Integer.valueOf(request.getParameter("id_projeto"));
-
+		Integer id_projeto = Integer.valueOf(request.getParameter("id_projeto"));
 		try (Connection connection = new ConnectionFactory().getConnection()) {
 			ProjetoDao projetoDao = new ProjetoDao(connection);
+			VersaoDao versaoDao = new VersaoDao(connection);
+			
 			Projeto projeto = projetoDao.buscarPorId(id_projeto);
-			VersaoDao dao = new VersaoDao(connection);
-			List<Versao> versoes = dao.listarVersoesDoProjeto(id_projeto);
-
+			List<Projeto> projetos = projetoDao.listarProjetosAtivos();
+			List<Versao> versoes = versaoDao.listarVersoesAtivasDoProjeto(id_projeto);
+			
 			request.setAttribute("projeto", projeto);
+			request.setAttribute("projetos", projetos);
 			request.setAttribute("versoes", versoes);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		return "forward:versoes/versoes.jsp";
+		
+		return "forward:versoes/new-version.jsp";
 	}
 
 }

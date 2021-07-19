@@ -10,23 +10,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.sistemaDocumentacao.connection.ConnectionFactory;
 import br.com.sistemaDocumentacao.dao.VersaoDao;
-import br.com.sistemaDocumentacao.modelo.Versao;
 
-public class EditarVersao implements Acao{
+public class ExcluirVersao implements Acao {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Integer id_versao = Integer.valueOf(request.getParameter("id_versao"));
+		Integer idVersao = Integer.valueOf(request.getParameter("id_versao"));
+		Integer idProjeto = Integer.valueOf(request.getParameter("id_projeto"));
 		
-		try (Connection connection = new ConnectionFactory().getConnection()) {
+		try (Connection connection = new ConnectionFactory().getConnection()){
 			VersaoDao versaoDao = new VersaoDao(connection);
-			Versao versao = versaoDao.buscarPorId(id_versao);
-			request.setAttribute("versao", versao);
+			versaoDao.excluir(idVersao);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
-		}		
-		return "forward:versoes/update-version.jsp";
+		}
+		
+		return "redirect:Versoes&id_projeto=" + idProjeto;
 	}
-
 }
