@@ -63,7 +63,7 @@
 	<c:url value="${linkTelas}&id_versao=${versao.id_versao}"
 		var="tela" />
 	<tr>
-		<td><a href="${tela}">${versao.id_versao}</a></td>
+		<td><a href="${tela}">${versao.numero_versao}</a></td>
 		<td><a href="${tela}">${versao.data_lancamento}</a></td>
 		<td><a href="${tela}">${versao.gmud}</a></td>
 		<td><a href="${tela}">total de func</a></td>
