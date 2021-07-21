@@ -2,6 +2,7 @@ package br.com.sistemaDocumentacao.acao;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -17,12 +18,14 @@ public class Projetos implements Acao{
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Connection connection = new ConnectionFactory().getConnection();
-		ProjetoDao dao = new ProjetoDao(connection);
-		
-		List<Projeto> projetos = dao.listarProjetos();
-		
-		request.setAttribute("projetos", projetos);
+		try (Connection connection = new ConnectionFactory().getConnection()) {
+			ProjetoDao dao = new ProjetoDao(connection);			
+			List<Projeto> projetos = dao.listarProjetos();
+			request.setAttribute("projetos", projetos);
+			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 		
 		return "forward:projetos/projetos.jsp";
 	}
