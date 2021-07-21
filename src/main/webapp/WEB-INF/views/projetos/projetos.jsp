@@ -26,6 +26,8 @@
 
 		<c:import url="/components/header.jsp" />
 
+		<c:import url="/components/menuItens.jsp" />
+
 		<div class="container">
 			<div class="table">
 

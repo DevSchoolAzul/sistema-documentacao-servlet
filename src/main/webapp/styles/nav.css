@@ -1,0 +1,41 @@
+:root {
+  --white: #ffffff;
+  --white-darker: #f1f1f1;
+  --black: #000000;
+  --black-lighter: #333333;
+  --blue-lighter: #bed4ff;
+  --blue: #0066ff;
+  --blue-dark: #005ce6;
+  --blue-darker: #0052cf;
+  --orange-light: #ffa319;
+  --orange: #ff9900;
+  --orange-darker: #e68a00;
+  --red: #c52a19;
+  --red-dark: #b12516;
+  --red-darker: #9f2113;
+  --gray-lighter: #e3e3e3;
+  --gray-light: #e8e8e8;
+  --gray: #7d7c83;
+  --gray-darker: #646369;
+}
+
+nav {
+	display:flex;
+	padding-left: 1rem;
+	background-color: var(--blue-darker);
+	font: 600 1rem "Inter", sans-serif;
+}
+
+nav a {
+	margin: 0.3rem 0.1rem;	
+	padding: 1rem 0.5rem;
+	color: var(--blue-lighter);
+	border-radius: 0.2rem;
+}
+
+nav a:hover {
+	background-color: var(--blue-lighter);
+	color: var(--blue-darker);
+	border-radius: 0.2rem;
+}
+
