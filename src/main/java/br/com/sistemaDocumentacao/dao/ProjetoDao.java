@@ -70,7 +70,6 @@ public class ProjetoDao {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		System.out.println(projeto);
 		return projeto;
 	}
 
@@ -88,6 +87,80 @@ public class ProjetoDao {
 					projeto.setId_projeto(id);
 					projeto.setNome(nome);
 					projeto.setSituacao(situacao);
+					projetos.add(projeto);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return projetos;
+	}
+
+	public List<Projeto> buscarPorNome(String nomeBuscado) {
+		String sql = "SELECT id_projeto, nome, situacao FROM projeto WHERE nome LIKE ?";
+		List<Projeto> projetos = new ArrayList<>();
+		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.setString(1, "%"+nomeBuscado+"%");
+			pstm.execute();
+			try (ResultSet result = pstm.getResultSet()) {
+				while (result.next()) {
+					Integer id = result.getInt(1);
+					String nome = result.getString(2);
+					boolean situacao = result.getBoolean(3);
+					Projeto projeto = new Projeto();
+					projeto.setId_projeto(id);
+					projeto.setNome(nome);
+					projeto.setSituacao(situacao);
+					
+					projetos.add(projeto);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return projetos;
+	}
+
+	public List<Projeto> buscarPorNomeESituacao(String nomeBuscado, boolean situacao) {
+		String sql = "SELECT id_projeto, nome FROM projeto WHERE (nome LIKE ?) AND (situacao = ?)";
+		List<Projeto> projetos = new ArrayList<>();
+		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.setString(1, "%"+nomeBuscado+"%");
+			pstm.setBoolean(2, situacao);
+			pstm.execute();
+			try (ResultSet result = pstm.getResultSet()) {
+				while (result.next()) {
+					Integer id = result.getInt(1);
+					String nome = result.getString(2);
+					Projeto projeto = new Projeto();
+					projeto.setId_projeto(id);
+					projeto.setNome(nome);
+					projeto.setSituacao(situacao);
+					
+					projetos.add(projeto);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return projetos;
+	}
+
+	public List<Projeto> listarPorSituacao(boolean situacao) {
+		String sql = "SELECT id_projeto, nome FROM projeto WHERE situacao = ?";
+		List<Projeto> projetos = new ArrayList<>();
+		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.setBoolean(1, situacao);
+			pstm.execute();
+			try (ResultSet result = pstm.getResultSet()) {
+				while (result.next()) {
+					Integer id = result.getInt(1);
+					String nome = result.getString(2);
+					Projeto projeto = new Projeto();
+					projeto.setId_projeto(id);
+					projeto.setNome(nome);
+					projeto.setSituacao(situacao);
+					
 					projetos.add(projeto);
 				}
 			}

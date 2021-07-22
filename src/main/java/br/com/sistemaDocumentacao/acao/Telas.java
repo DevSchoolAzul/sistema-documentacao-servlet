@@ -10,26 +10,58 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.sistemaDocumentacao.connection.ConnectionFactory;
+import br.com.sistemaDocumentacao.dao.ProjetoDao;
 import br.com.sistemaDocumentacao.dao.TelaDao;
+import br.com.sistemaDocumentacao.dao.VersaoDao;
+import br.com.sistemaDocumentacao.modelo.Projeto;
 import br.com.sistemaDocumentacao.modelo.Tela;
+import br.com.sistemaDocumentacao.modelo.Versao;
 
 public class Telas implements Acao {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Integer id_versao = Integer.valueOf(request.getParameter("id_versao"));
+		String parametroIdProjeto = request.getParameter("id_projeto");
+		String parametroIdVersao = request.getParameter("id_versao");
+		String parametroSituacao = request.getParameter("situacao");
 		
 		try (Connection connection = new ConnectionFactory().getConnection()) {
-			TelaDao telaDao = new TelaDao(connection);
-			// TODO alterar listarTela para listarTelas (no plural)
-			List<Tela> telas = telaDao.listarTelaDeUmaVersao(id_versao);
 			
-			request.setAttribute("telas", telas);
+			ProjetoDao projetoDao = new ProjetoDao(connection);
+			List<Projeto> projetos = projetoDao.listarProjetos();
+			request.setAttribute("projetos", projetos);
+
+			if (parametroIdProjeto != null && parametroIdProjeto != "0") {
+				Integer idProjeto = Integer.valueOf(parametroIdProjeto);
+				VersaoDao versaoDao = new VersaoDao(connection);
+				List<Versao> versoes = versaoDao.listarVersoesDoProjeto(idProjeto);
+				request.setAttribute("versoes", versoes);
+			}
+			
+			if (parametroIdVersao != null && parametroIdVersao != "0") {
+				TelaDao telaDao = new TelaDao(connection);
+				// TODO alterar listarTela para listarTelas (no plural)
+				Integer idVersao = Integer.valueOf(parametroIdVersao);
+				List<Tela> telas;
+				if (parametroSituacao == null || parametroSituacao.equals("0")) {
+					telas = telaDao.listarTelaDeUmaVersao(idVersao);
+					request.setAttribute("telas", telas);					
+				} else {
+					boolean situacao = "1".equals(parametroSituacao);
+					telas = telaDao.listarTelaDeUmaVersaoComSituacao(idVersao, situacao);
+				}
+				request.setAttribute("telas", telas);
+			}
+			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		
+		
+		request.setAttribute("id_projeto", parametroIdProjeto);
+		request.setAttribute("id_versao", parametroIdVersao);
+		request.setAttribute("parametroSituacao", parametroSituacao);
 		return "forward:telas/telas.jsp";
 	}
 

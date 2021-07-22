@@ -192,4 +192,9 @@ public class TelaDao {
 		}
 		return telas;
 	}
+
+	public List<Tela> listarTelaDeUmaVersaoComSituacao(Integer idVersao, boolean situacao) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

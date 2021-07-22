@@ -36,26 +36,47 @@
 						<ul class="bd-group">
 							<li><a href="index">Projetos</a></li>
 						</ul>
-					</div>
-					<div class="title-content">
-						<div class="flex">
-							<div class="search-box">
-								<input type="text" />
-								<button type="submit">
-									<span class="lnr lnr-magnifier"></span>
-								</button>
-							</div>
-							<select class="input-drop query-drop" name="status">
-								<option value="">---</option>
-								<option value="1">Ativo</option>
-								<option value="2">Inativo</option>
-							</select>
-						</div>
 						<a href="${novoProjeto }">
 							<button class="btn btn-create">
 								<span class="lnr lnr-file-add"></span>Cadastro
 							</button>
 						</a>
+					</div>
+					<div class="title-content">
+						<div class="flex">
+						
+							<form method="get" action="entrada" class="search-box">
+								<input type="hidden" name="acao" value="Projetos"/>
+								
+								<label for="nomeProjeto">Nome do projeto:</label>
+								<input type="text" name="nomeProjeto" value="${nomeProjeto }" />
+								<label for="situacao">Situação:</label>
+								<select class="input-drop query-drop" name="situacao">
+									<c:choose>
+										<c:when test="${parametroSituacao eq '1' }">
+											<option value="0">Qualquer</option>
+											<option value="1" selected>Ativo</option>
+											<option value="2">Inativo</option>
+										</c:when>
+										<c:when test="${parametroSituacao eq '2' }">
+											<option value="0">Qualquer</option>
+											<option value="1">Ativo</option>
+											<option value="2" selected>Inativo</option>
+										</c:when>
+										<c:otherwise>
+											<option value="0" selected>Qualquer</option>
+											<option value="1">Ativo</option>
+											<option value="2">Inativo</option>
+										</c:otherwise>
+									</c:choose>
+								</select>
+								<button type="submit">
+									<span class="lnr lnr-magnifier"></span>
+								</button>
+							</form>
+							
+						</div>
+						
 					</div>
 				</div>
 
@@ -64,8 +85,8 @@
 
 					<c:forEach items="${projetos }" var="projeto">
 						<div class="box">
-							<a href="entrada?acao=Versoes&id_projeto=${projeto.id_projeto }" class="project"><p>${projeto.nome }-
-									${projeto.situacao }</p></a>
+							<a href="entrada?acao=Versoes&id_projeto=${projeto.id_projeto }" class="project"><p>${projeto.nome } -
+									${projeto.situacao ? 'Ativo' : 'inativo' }</p></a>
 							<div class="btn-manage">
 								<a href="${editarProjeto }&id_projeto=${projeto.id_projeto}"><span
 									class="lnr lnr-pencil btn-manage"></span></a> <a
