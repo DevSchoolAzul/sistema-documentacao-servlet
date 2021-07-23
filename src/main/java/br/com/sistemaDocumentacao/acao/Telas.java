@@ -31,7 +31,7 @@ public class Telas implements Acao {
 			ProjetoDao projetoDao = new ProjetoDao(connection);
 			List<Projeto> projetos = projetoDao.listarProjetos();
 			request.setAttribute("projetos", projetos);
-
+			
 			if (parametroIdProjeto != null && parametroIdProjeto != "0") {
 				Integer idProjeto = Integer.valueOf(parametroIdProjeto);
 				VersaoDao versaoDao = new VersaoDao(connection);
@@ -39,20 +39,20 @@ public class Telas implements Acao {
 				request.setAttribute("versoes", versoes);
 			}
 			
+			TelaDao telaDao = new TelaDao(connection);
+			List<Tela> telas;
 			if (parametroIdVersao != null && parametroIdVersao != "0") {
-				TelaDao telaDao = new TelaDao(connection);
-				// TODO alterar listarTela para listarTelas (no plural)
 				Integer idVersao = Integer.valueOf(parametroIdVersao);
-				List<Tela> telas;
 				if (parametroSituacao == null || parametroSituacao.equals("0")) {
-					telas = telaDao.listarTelaDeUmaVersao(idVersao);
-					request.setAttribute("telas", telas);					
+					telas = telaDao.listarTelasDeUmaVersao(idVersao);
 				} else {
 					boolean situacao = "1".equals(parametroSituacao);
-					telas = telaDao.listarTelaDeUmaVersaoComSituacao(idVersao, situacao);
+					telas = telaDao.listarTelasDeUmaVersaoComSituacao(idVersao, situacao);
 				}
-				request.setAttribute("telas", telas);
+			} else {
+				telas = telaDao.listarTelas();
 			}
+			request.setAttribute("telas", telas);
 			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

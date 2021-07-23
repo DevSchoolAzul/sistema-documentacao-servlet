@@ -114,7 +114,7 @@ public class TelaDao {
 		return tela;
 	}
 
-	public List<Tela> listarTela() {
+	public List<Tela> listarTelas() {
 		String sql = "SELECT * FROM tela";
 		List<Tela> telas = new ArrayList<>();
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
@@ -153,7 +153,7 @@ public class TelaDao {
 		return telas;
 	}
 	
-	public List<Tela> listarTelaDeUmaVersao(int id_versao) {
+	public List<Tela> listarTelasDeUmaVersao(int id_versao) {
 		String sql = "SELECT * FROM tela WHERE id_versao = ?";
 		List<Tela> telas = new ArrayList<>();
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
@@ -193,8 +193,42 @@ public class TelaDao {
 		return telas;
 	}
 
-	public List<Tela> listarTelaDeUmaVersaoComSituacao(Integer idVersao, boolean situacao) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Tela> listarTelasDeUmaVersaoComSituacao(Integer idVersao, boolean situacao) {
+		String sql = "SELECT * FROM tela WHERE id_versao = ? AND situacao = ?";
+		List<Tela> telas = new ArrayList<>();
+		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.setInt(1, idVersao);
+			pstm.setBoolean(2, situacao);
+			pstm.execute();
+			try (ResultSet result = pstm.getResultSet()) {
+				while (result.next()) {
+					Integer idTela = result.getInt(1);
+					Date dataCadastro = result.getDate(3);
+					String nomeTela = result.getString(4);
+					String imagem = result.getString(5);
+					Integer telaPai = result.getInt(7);
+					Integer ordem = result.getInt(8);
+					String urlLog = result.getString(9);
+					Integer versaoOrigem = result.getInt(10);
+					Tela tela = new Tela();
+
+					tela.setIdTela(idTela);
+					tela.setIdVersao(idVersao);
+					tela.setDataCadastro(dataCadastro.toLocalDate());
+					tela.setNomeTela(nomeTela);
+					tela.setImagem(imagem);
+					tela.setSituacao(situacao);
+					tela.setTelaPai(telaPai);
+					tela.setOrdem(ordem);
+					tela.setUrlLog(urlLog);
+					tela.setVersaoOrigem(versaoOrigem);
+					
+					telas.add(tela);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return telas;
 	}
 }

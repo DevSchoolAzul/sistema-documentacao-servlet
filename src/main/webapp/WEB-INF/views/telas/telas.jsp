@@ -128,11 +128,14 @@
 									<td><a href="">${tela.dataCadastro }</a></td>
 									<td><a href="">${tela.urlLog }</a></td>
 									<td><a href="">${tela.situacao eq true ? "Ativo" : "Inativo" }</a></td>
-									<td><a
-										href="${atualizarTela }&id_tela=${tela.idTela}"><span
-											class="lnr lnr-pencil btn-manage"></span></a> <a
-										href="${excluirTela }&id_versao=${versao.idTela}"><span
-											class="lnr lnr-trash btn-manage"></span></a></td>
+									<td>
+										<a href="${atualizarTela }&id_tela=${tela.idTela}">
+											<span class="lnr lnr-pencil btn-manage"></span>
+										</a>
+										<a href="${excluirTela }&id_tela=${tela.idTela}">
+											<span class="lnr lnr-trash btn-manage"></span>
+										</a>
+									</td>
 								<tr>
 							</c:forEach>
 
