@@ -13,7 +13,7 @@ use sistema_documentacao;
 create table if not exists usuario (
 id_usuario integer not null auto_increment,
 nome varchar(255) not null,
-enail varchar(255) not null,
+email varchar(255) not null,
 senha varchar(255) not null,
 primary key (id_usuario)
 );
