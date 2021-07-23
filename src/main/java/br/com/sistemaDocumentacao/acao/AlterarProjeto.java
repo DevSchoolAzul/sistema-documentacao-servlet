@@ -2,6 +2,7 @@ package br.com.sistemaDocumentacao.acao;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +25,13 @@ public class AlterarProjeto implements Acao {
 		projeto.setNome(nome);
 		projeto.setSituacao(situacao);
 		
-		Connection connection = new ConnectionFactory().getConnection();
-		ProjetoDao dao = new ProjetoDao(connection);
-		dao.atualizar(projeto);
+		try (Connection connection = new ConnectionFactory().getConnection()) {
+			ProjetoDao dao = new ProjetoDao(connection);
+			dao.atualizar(projeto);			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return "redirect:Projetos";
 	}
