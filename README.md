@@ -1,5 +1,99 @@
 # sistema-documentacao-servlet
 
+## Estrutura do projeto
+
+### Pacotes de java:
+
+<details>
+  <summary>Acao</summary>
+  Neste pacote é onde estará o codigo que servlet deverá executar.
+    
+  Normalmente terá, para cada recurso(projeto, versao, tela...), as seguintes ações: 
+  - Listar
+  - Exibir formulário de cadastrar novo recurso
+  - Cadastrar o novo recurso
+  - Exibir o formulario de alterar o recurso
+  - Alterar o recurso
+  - Excluir
+</details>
+
+<details>
+<summary>Modelo</summary>
+  
+  Neste pacote estarão as classe de modelo usadas para interagir com o banco de dados.
+
+  Elas representam as tabelas do banco de dados.
+  
+  Seus atributos representam as colunas da tabela.
+</details>
+
+<details>
+<summary>DAO</summary>
+
+  É a classe que contem a lógica para interagir com o banco de dados.
+
+  Nela que está escrito os codigos SQL para fazer os CRUDs.
+</details>
+
+<details>
+<summary>Connection</summary>
+
+  Neste pacote está a classe ConnectionFactory que é responsavel por gerar conexões com o banco de dados e fornece-las para as classes do sistema que as pedem.
+</details>
+
+<details>
+<summary>Servlet</summary>
+
+  Neste projeto, todo o acesso do usuário aos recursos do sistema está sendo feito por uma única entrada que está sendo mapeada para `/entrada`. 
+
+  **Servlet** é um objeto especial armazenado dentro do projeto, e sua particularidade consiste na possibilidade de o chamarmos via protocolo HTTP.
+
+  O servlet consegue identificar o recurso que o usuario deseja acessar através de parâmetros que são passados juntos na URL. Isso é possivel pois o servlet está usando Reflection.
+
+  O **Reflection**, em poucas palavras, serve para determinar métodos e atributos que serão utilizados de determinada classe (que você nem conhece) em tempo de execução. [saiba mais](https://www.devmedia.com.br/conhecendo-java-reflection/29148)
+</details>
+
+### Pacotes de web:
+
+<details>
+<summary>Components</summary>
+
+  Estão codigos HTML que se repetem em varias paginas
+
+  São importados pelas paginas que o necessitam através da tag do JSTL `<c:import url="nome do component" />`
+</details>
+
+<details>
+<summary>Public</summary>
+
+  Onde estão as imagens para o site
+</details>
+  
+<details>
+<summary>Styles</summary>
+
+  Onde está o CSS
+</details>
+
+<details>
+  <summary>Web-inf</summary>
+
+  Onde está a pasta views com os JSPs e o arquivo web.xml
+  <details>
+    <summary>views</summary>
+
+  Tem as paginas JSP para cada recurso do sistema:
+  - projetos
+  - telas
+  - versões
+  - Tipo de evento
+  - Evento
+  - Requisição
+  - Propriedades de Requisição
+  </details>
+  
+</details>
+
 ## Como utilizar o docker do MySQL no projeto
 
 ### Subindo o container: 
