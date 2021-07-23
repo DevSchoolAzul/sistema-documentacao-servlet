@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.sistemaDocumentacao.modelo.Evento;
 
@@ -82,4 +84,59 @@ public class EventoDao {
 		return evento;
 	}
 
+	public List<Evento> listarEventos() {
+		List<Evento> eventos = new ArrayList<>();
+		
+		String sql = "SELECT * FROM evento";
+		try(PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.execute();
+			try(ResultSet rst = pstm.getResultSet()) {
+				while(rst.next()) {
+					Evento evento = new Evento();
+					evento.setId_evento(rst.getInt(1));
+					evento.setId_tipo_evento(rst.getInt(2));
+					evento.setId_tela(rst.getInt(3));
+					evento.setSituacao(rst.getBoolean(4));
+					evento.setOrdem(rst.getInt(5));
+					evento.setParametros(rst.getString(6));
+					eventos.add(evento);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException();
+		}
+		return eventos;
+	}
+	
+	public List<Evento> listarEventosDaTela(Integer id_tela) {
+
+		List<Evento> eventos = new ArrayList<>();
+
+		String sql = "SELECT * FROM requisicao WHERE ID_TELA = ?";
+
+		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+			pstm.setInt(1, id_tela);
+
+			pstm.execute();
+
+			try (ResultSet rst = pstm.getResultSet()) {
+				while (rst.next()) {
+					Evento evento = new Evento();
+					evento.setId_evento(rst.getInt(1));
+					evento.setId_tipo_evento(rst.getInt(2));
+					evento.setId_tela(rst.getInt(3));
+					evento.setSituacao(rst.getBoolean(4));
+					evento.setOrdem(rst.getInt(5));
+					evento.setParametros(rst.getString(6));
+					eventos.add(evento);
+				}
+			}
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return eventos;
+	}
 }
+
+
+
