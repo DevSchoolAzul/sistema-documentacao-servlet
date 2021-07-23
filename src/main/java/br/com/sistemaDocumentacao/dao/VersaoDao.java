@@ -133,7 +133,7 @@ public class VersaoDao {
 		String sql = "SELECT "
 				+ "id_versao, gmud, descricao, data_lancamento, situacao, ordem, numero_versao"
 				+ " FROM versao WHERE id_projeto = ?";
-		List<Versao> versoes = new ArrayList();
+		List<Versao> versoes = new ArrayList<>();
 		try(PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.setInt(1, id_projeto);
 			pstm.execute();

@@ -2,6 +2,7 @@ package br.com.sistemaDocumentacao.acao;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +18,12 @@ public class ExcluirProjeto implements Acao{
 			throws ServletException, IOException {
 		int id = Integer.valueOf(request.getParameter("id_projeto"));
 		
-		Connection connection = new ConnectionFactory().getConnection();
-		ProjetoDao dao = new ProjetoDao(connection);
-		dao.excluir(id);
+		try(Connection connection = new ConnectionFactory().getConnection()) {
+			ProjetoDao dao = new ProjetoDao(connection);
+			dao.excluir(id);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 		
 		return "redirect:Projetos";
 	}
