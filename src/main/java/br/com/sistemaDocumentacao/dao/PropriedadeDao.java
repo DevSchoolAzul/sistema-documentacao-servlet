@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.sistemaDocumentacao.modelo.Propriedade;
@@ -88,7 +89,7 @@ public class PropriedadeDao {
 	public List<Propriedade> ListarPropriedades() {
 		String sql = "SELECT id_propriedade, id_requisicao, chave, valor, ordem "
 				+ "FROM propriedade";
-		List<Propriedade> propriedades = null;
+		List<Propriedade> propriedades = new ArrayList<>();
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.execute();
 			try(ResultSet result = pstm.getResultSet()) {
