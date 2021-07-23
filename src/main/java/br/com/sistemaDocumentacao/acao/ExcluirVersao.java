@@ -17,7 +17,6 @@ public class ExcluirVersao implements Acao {
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Integer idVersao = Integer.valueOf(request.getParameter("id_versao"));
-		Integer idProjeto = Integer.valueOf(request.getParameter("id_projeto"));
 		
 		try (Connection connection = new ConnectionFactory().getConnection()){
 			VersaoDao versaoDao = new VersaoDao(connection);
@@ -26,6 +25,6 @@ public class ExcluirVersao implements Acao {
 			throw new RuntimeException(e);
 		}
 		
-		return "redirect:Versoes&id_projeto=" + idProjeto;
+		return "redirect:Versoes";
 	}
 }

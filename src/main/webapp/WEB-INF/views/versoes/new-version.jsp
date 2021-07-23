@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <c:url value="entrada?acao=Versoes&id_projeto=${projeto.id_projeto }" var="paginaVersoes"/>
 <c:url value="entrada?acao=InserirVersao" var="cadastrarVersao"/>
 
@@ -108,7 +109,7 @@
             	</div>
 	            <div class="form-group textarea">
 	                <label for="description">Descrição:</label>
-	                <textarea id="description" nome="descricao"></textarea>
+	                <textarea id="description" name="descricao"></textarea>
 	            </div>
 	            <div class="btn-group">
 	                <a href="${paginaVersoes }"><button class="btn btn-cancel" type="button">Cancelar</button></a>

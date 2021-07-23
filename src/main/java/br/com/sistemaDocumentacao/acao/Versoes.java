@@ -29,17 +29,18 @@ public class Versoes implements Acao {
 		List<Projeto> projetos;
 		try (Connection connection = new ConnectionFactory().getConnection()) {
 			ProjetoDao projetoDao = new ProjetoDao(connection);
-			VersaoDao dao = new VersaoDao(connection);
+			VersaoDao versaoDao = new VersaoDao(connection);
 			projetos = projetoDao.listarProjetos();
-			if (parametroIdProjeto != null) {
-				Integer idProjeto = Integer.valueOf(parametroIdProjeto);
-				boolean situacao = "1".equals(parametroSituacao);
-				if (parametroSituacao == null || Integer.valueOf(parametroSituacao) == 0) {
-					versoes = dao.listarVersoesDoProjeto(idProjeto);
-				} else {
-					versoes = dao.listarVersoesDoProjetoComSituacao(idProjeto, situacao);
-				}
-			}
+			versoes = versaoDao.listarVersoes();
+//			if (parametroIdProjeto != null) {
+//				Integer idProjeto = Integer.valueOf(parametroIdProjeto);
+//				boolean situacao = "1".equals(parametroSituacao);
+//				if (parametroSituacao == null || Integer.valueOf(parametroSituacao) == 0) {
+//					versoes = dao.listarVersoesDoProjeto(idProjeto);
+//				} else {
+//					versoes = dao.listarVersoesDoProjetoComSituacao(idProjeto, situacao);
+//				}
+//			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}

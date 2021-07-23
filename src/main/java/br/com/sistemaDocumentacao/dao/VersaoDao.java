@@ -30,6 +30,7 @@ public class VersaoDao {
 			pstm.setBoolean(5, versao.isSituacao()); // boolean usa is ao inv�s de get
 			pstm.setInt(6, versao.getOrdem());
 			pstm.setString(7, versao.getNumero_versao());
+			pstm.execute();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -45,6 +46,8 @@ public class VersaoDao {
 			pstm.setBoolean(5, versao.isSituacao());
 			pstm.setInt(6, versao.getOrdem());
 			pstm.setString(7, versao.getNumero_versao());
+			pstm.setInt(8, versao.getId_versao());
+			pstm.execute();
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
@@ -61,27 +64,34 @@ public class VersaoDao {
 	}
 
 	public Versao buscarPorId(int id) {
-		String sql = "SELECT versao, situacao, id_projeto, FROM versao WHERE id_versao = ?";
+		String sql = "SELECT id_projeto, gmud, descricao, data_lancamento, situacao, ordem, numero_versao FROM versao WHERE id_versao = ?";
 		Versao versao = null; // no caso do id passado inexistir, � retornado um null
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.setInt(1, id);
 			pstm.execute();
 			try (ResultSet result = pstm.getResultSet()) {
 				while (result.next()) {
-					String numero_versao = result.getString(1); // revisar
-					boolean situacao = result.getBoolean(2);
-					int id_projeto = result.getInt(3);
+					String numero_versao = result.getString(7); // revisar
+					boolean situacao = result.getBoolean(5);
+					int id_projeto = result.getInt(1);
+					String gmud = result.getString(2);
+					String descricao = result.getString(3);
+					LocalDate dataLancamento = result.getDate(4).toLocalDate();
+					int ordem = result.getInt(6);
 					versao = new Versao();
 					versao.setNumero_versao(numero_versao);
 					versao.setId_versao(id);
 					versao.setId_projeto(id_projeto);
 					versao.setSituacao(situacao);
+					versao.setGmud(gmud);
+					versao.setDescricao(descricao);
+					versao.setData_lancamento(dataLancamento);
+					versao.setOrdem(ordem);
 				}
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		System.out.println(versao);
 		return versao;
 	}
 

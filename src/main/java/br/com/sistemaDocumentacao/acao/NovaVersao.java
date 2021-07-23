@@ -20,16 +20,16 @@ public class NovaVersao implements Acao {
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Integer id_projeto = Integer.valueOf(request.getParameter("id_projeto"));
+//		Integer id_projeto = Integer.valueOf(request.getParameter("id_projeto"));
 		try (Connection connection = new ConnectionFactory().getConnection()) {
 			ProjetoDao projetoDao = new ProjetoDao(connection);
 			VersaoDao versaoDao = new VersaoDao(connection);
 			
-			Projeto projeto = projetoDao.buscarPorId(id_projeto);
-			List<Projeto> projetos = projetoDao.listarProjetosAtivos();
-			List<Versao> versoes = versaoDao.listarVersoesAtivasDoProjeto(id_projeto);
+//			Projeto projeto = projetoDao.buscarPorId(id_projeto);
+			List<Projeto> projetos = projetoDao.listarProjetos();
+			List<Versao> versoes = versaoDao.listarVersoes();
 			
-			request.setAttribute("projeto", projeto);
+//			request.setAttribute("projeto", projeto);
 			request.setAttribute("projetos", projetos);
 			request.setAttribute("versoes", versoes);
 		} catch (SQLException e) {
