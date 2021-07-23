@@ -22,7 +22,7 @@ public class InserirVersao implements Acao {
 		String parametroDataLancamento = request.getParameter("data_lancamento");
 		String parametroGmud = request.getParameter("gmud");
 		String parametroNumeroVersao = request.getParameter("numero_versao");
-		String parametroIdClone = request.getParameter("id_clone");
+		//String parametroIdClone = request.getParameter("id_clone");
 		String parametroSituacao = request.getParameter("situacao");
 		String parametroDescricao = request.getParameter("descricao");
 		
