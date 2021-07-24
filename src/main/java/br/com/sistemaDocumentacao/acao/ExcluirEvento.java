@@ -9,23 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.sistemaDocumentacao.connection.ConnectionFactory;
-import br.com.sistemaDocumentacao.dao.RequisicaoDao;
+import br.com.sistemaDocumentacao.dao.EventoDao;
 
 public class ExcluirEvento implements Acao{
-
+	
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		Integer paramatroIdRequisicao = Integer.valueOf(request.getParameter("id_requisicao"));
+		Integer paramatroIdEvento = Integer.valueOf(request.getParameter("id_evento"));
 		
 		try (Connection connection = new ConnectionFactory().getConnection()) {
-			RequisicaoDao requisicaoDao = new RequisicaoDao(connection);
-			requisicaoDao.excluir(paramatroIdRequisicao);
+			EventoDao eventoDao = new EventoDao(connection);
+			eventoDao.excluir(paramatroIdEvento);
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
 		
-		return "redirect:Requisicoes";
+		return "redirect:Eventos";
 	}
 
 }
