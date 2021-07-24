@@ -60,7 +60,7 @@ public class EventoDao {
 		}
 	}
 	
-	public Evento buscar(int id) {
+	public Evento buscarPorId(int id) {
 		String sql = "SELECT id_tipo_evento, id_tela, situacao, ordem, parametros"
 				+ " FROM evento WHERE id_evento = ?";
 		Evento evento = null;
