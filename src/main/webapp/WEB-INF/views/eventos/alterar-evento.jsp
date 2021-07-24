@@ -1,7 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:url value="entrada?acao=Eventos" var="paginaEventos" />
-<c:url value="entrada?acao=AlterarEventos" var="atualizar" />
+<c:url value="entrada?acao=AlterarEvento" var="atualizar" />
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,9 +70,9 @@
 				<input type="hidden" name="id_evento" value="${evento.id_evento}" />
 				<div class="form-col">				
 					<div class="form-group">
-						<label for="tipo_evento">Tipo de Evento:</label>
-						<select name="tipo_evento">
-							<c:forEach items="tiposEventos" var="tipoEvento">
+						<label for="id_tipo_evento">Tipo de Evento:</label>
+						<select name="id_tipo_evento">
+							<c:forEach items="${tiposEventos}" var="tipoEvento">
 								<option value="${tipoEvento.id_tipo_evento }" 
 									${tipoEvento.id_tipo_evento eq evento.id_tipo_evento ? 'selected': ''}>
 										${tipoEvento.nome }
@@ -84,7 +84,7 @@
 					<div class="form-group">
 						<label for="id_tela">Tela:</label>
 						<select name="id_tela">
-							<c:forEach items="telas" var="tela">
+							<c:forEach items="${telas}" var="tela">
 								<option value="${tela.idTela }" 
 									${tela.idTela eq evento.id_tela ? 'selected': ''}>
 										${tela.nomeTela }
@@ -96,7 +96,10 @@
 				<div class="form-col">
 					<div class="form-group">
 						<label for="situacao">Situacao:</label>
-						<input type="text" id="situacao" name="situacao" value="${evento.situacao }" />
+						<select class="input-drop" name="situacao" id="status">
+	                        <option value="1" ${evento.situacao eq true ? 'selected' : '' }>Ativo</option>
+	                        <option value="0" ${evento.situacao eq false ? 'selected' : '' }>Inativo</option>
+	                    </select>
 					</div>
 					<div class="form-group">
 						<label for="ordem">ordem:</label>

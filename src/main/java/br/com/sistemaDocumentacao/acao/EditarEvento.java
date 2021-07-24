@@ -37,7 +37,7 @@ public class EditarEvento implements Acao {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		return "forward:eventos/altera-evento.jsp";
+		return "forward:eventos/alterar-evento.jsp";
 	}
 
 }

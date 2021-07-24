@@ -1,6 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:url value="entrada?acao=TiposEventos" var="paginaEventos" />
+<c:url value="entrada?acao=TiposEventos" var="paginaTiposEventos" />
 <c:url value="entrada?acao=AlterarTipoEvento" var="alterar" />
 
 <!DOCTYPE html>
@@ -64,7 +64,7 @@
 					type="button">
 					<span class="lnr lnr-cross"></span>
 				</button></a>
-			<h1>Cadastrar Tipos Eventos</h1>
+			<h1>Alterar Tipos Eventos</h1>
 
 			<form method="POST" action="${alterar}">
 				<input type="hidden" name="id_tipo_evento" value="${tipo.id_tipo_evento }"/>
