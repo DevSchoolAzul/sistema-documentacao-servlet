@@ -1,10 +1,9 @@
 package br.com.sistemaDocumentacao.modelo;
 
 public class TipoEvento {
-	
+
 	private String nome;
 	private boolean situacao;
-	private int ordem;
 	private int id_tipo_evento;
 
 	public String getNome() {
@@ -21,14 +20,6 @@ public class TipoEvento {
 
 	public void setSituacao(boolean situacao) {
 		this.situacao = situacao;
-	}
-
-	public int getOrdem() {
-		return ordem;
-	}
-
-	public void setOrdem(int ordem) {
-		this.ordem = ordem;
 	}
 
 	public int getId_tipo_evento() {

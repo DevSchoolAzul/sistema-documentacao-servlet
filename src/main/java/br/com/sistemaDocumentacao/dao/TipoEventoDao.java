@@ -18,11 +18,10 @@ public class TipoEventoDao {
 	}
 
 	public void cadastrar(TipoEvento TipoEvento) {
-		String sql = "INSERT INTO tipo_evento (nome, situacao, ordem) " + "values (?, ?, ?)";
+		String sql = "INSERT INTO tipo_evento (nome, situacao) " + "values (?, ?)";
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.setString(1, TipoEvento.getNome());
 			pstm.setBoolean(2, TipoEvento.isSituacao());
-			pstm.setInt(3, TipoEvento.getOrdem());
 
 			pstm.execute();
 		} catch (SQLException e) {
@@ -31,12 +30,11 @@ public class TipoEventoDao {
 	}
 
 	public void atualizar(TipoEvento TipoEvento) {
-		String sql = "UPDATE tipo_evento SET nome = ?, situacao = ?, ordem = ? WHERE id_projeto = ?";
+		String sql = "UPDATE tipo_evento SET nome = ?, situacao = ? WHERE id_projeto = ?";
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.setString(1, TipoEvento.getNome());
 			pstm.setBoolean(2, TipoEvento.isSituacao());
-			pstm.setInt(3, TipoEvento.getOrdem());
-			pstm.setInt(4, TipoEvento.getId_tipo_evento());
+			pstm.setInt(3, TipoEvento.getId_tipo_evento());
 
 			pstm.execute();
 		} catch (SQLException e) {
