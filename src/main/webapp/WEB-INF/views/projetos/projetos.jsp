@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.util.List,br.com.sistemaDocumentacao.modelo.Usuario"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:url value="entrada?acao=EditarProjeto" var="editarProjeto" />
 <c:url value="entrada?acao=ExcluirProjeto" var="excluirProjeto" />
 <c:url value="entrada?acao=NovoProjeto" var="novoProjeto" />
@@ -44,14 +45,13 @@
 					</div>
 					<div class="title-content">
 						<div class="flex">
-						
+
 							<form method="get" action="entrada" class="search-box">
-								<input type="hidden" name="acao" value="Projetos"/>
-								
-								<label for="nomeProjeto">Nome do projeto:</label>
-								<input type="text" name="nomeProjeto" value="${nomeProjeto }" />
-								<label for="situacao">Situação:</label>
-								<select class="input-drop query-drop" name="situacao">
+								<input type="hidden" name="acao" value="Projetos" /> <label
+									for="nomeProjeto">Nome do projeto:</label> <input type="text"
+									name="nomeProjeto" value="${nomeProjeto }" /> <label
+									for="situacao">Situação:</label> <select
+									class="input-drop query-drop" name="situacao">
 									<c:choose>
 										<c:when test="${parametroSituacao eq '1' }">
 											<option value="0">Qualquer</option>
@@ -74,9 +74,9 @@
 									<span class="lnr lnr-magnifier"></span>
 								</button>
 							</form>
-							
+
 						</div>
-						
+
 					</div>
 				</div>
 
@@ -85,8 +85,8 @@
 
 					<c:forEach items="${projetos }" var="projeto">
 						<div class="box">
-							<a href="entrada?acao=Versoes&id_projeto=${projeto.id_projeto }" class="project"><p>${projeto.nome } -
-									${projeto.situacao ? 'Ativo' : 'inativo' }</p></a>
+							<a href="entrada?acao=Versoes&id_projeto=${projeto.id_projeto }"
+								class="project"><p>${projeto.nome }- ${projeto.situacao ? 'Ativo' : 'inativo' }</p></a>
 							<div class="btn-manage">
 								<a href="${editarProjeto }&id_projeto=${projeto.id_projeto}"><span
 									class="lnr lnr-pencil btn-manage"></span></a> <a
