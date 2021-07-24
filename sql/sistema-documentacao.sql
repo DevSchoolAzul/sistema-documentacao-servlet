@@ -65,7 +65,6 @@ create table if not exists tipo_evento (
 id_tipo_evento integer not null auto_increment,
 nome varchar(255) not null,
 situacao boolean not null,
-ordem integer not null,
 primary key(id_tipo_evento)
 );
 
@@ -83,9 +82,8 @@ primary key(id_requisicao)
 );
 
 create table if not exists propriedade (
-id_propriedade integer not null,
+id_propriedade integer not null auto_increment,
 id_requisicao integer not null,
-tipo_propriedade varchar(255) not null,
 chave varchar(255) not null,
 valor varchar(255) not null,
 ordem integer not null,
