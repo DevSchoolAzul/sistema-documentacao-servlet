@@ -4,7 +4,7 @@
 			<a href="index"><img src="public/mobicare-akross-logo.svg" /></a>
 		</div>
 		<div class="profile-box">
-			Fulano de Tal no header <a href="login"><span
+			${usuarioLogado.nome} <a href="entrada?acao=Logout"><span
 				class="lnr lnr-exit"></span></a>
 		</div>
 	</header>
