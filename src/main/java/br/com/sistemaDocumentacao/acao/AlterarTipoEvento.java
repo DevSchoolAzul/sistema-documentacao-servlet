@@ -12,27 +12,25 @@ import br.com.sistemaDocumentacao.connection.ConnectionFactory;
 import br.com.sistemaDocumentacao.dao.TipoEventoDao;
 import br.com.sistemaDocumentacao.modelo.TipoEvento;
 
-public class InserirTipoEvento implements Acao {
+public class AlterarTipoEvento implements Acao {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String nome = request.getParameter("nome");
-		String situacao = request.getParameter("situacao");
+		String situaco = request.getParameter("situacao");
+		Integer id = Integer.valueOf(request.getParameter("id_tipo_evento"));
 		
-		TipoEvento tipo = new TipoEvento();
-		tipo.setNome(nome);
-		tipo.setSituacao("1".equals(situacao));
-		
-		try (Connection connection = new ConnectionFactory().getConnection()) {
-			TipoEventoDao tipoDao = new TipoEventoDao(connection);
-			tipoDao.cadastrar(tipo);
+		try (Connection connection = new ConnectionFactory().getConnection()){
+			TipoEventoDao dao = new TipoEventoDao(connection);
+			TipoEvento tipo = dao.buscarPorId(id);
+			tipo.setNome(nome);
+			tipo.setSituacao("1".equals(situaco));
+			dao.atualizar(tipo);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return "redirect:TiposEventos";
 	}
-
 }

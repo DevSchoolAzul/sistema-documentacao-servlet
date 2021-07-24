@@ -30,7 +30,7 @@ public class TipoEventoDao {
 	}
 
 	public void atualizar(TipoEvento TipoEvento) {
-		String sql = "UPDATE tipo_evento SET nome = ?, situacao = ? WHERE id_projeto = ?";
+		String sql = "UPDATE tipo_evento SET nome = ?, situacao = ? WHERE id_tipo_evento = ?";
 		try (PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.setString(1, TipoEvento.getNome());
 			pstm.setBoolean(2, TipoEvento.isSituacao());

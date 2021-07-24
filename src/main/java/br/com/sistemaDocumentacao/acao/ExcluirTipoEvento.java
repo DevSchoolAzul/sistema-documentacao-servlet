@@ -10,28 +10,20 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.sistemaDocumentacao.connection.ConnectionFactory;
 import br.com.sistemaDocumentacao.dao.TipoEventoDao;
-import br.com.sistemaDocumentacao.modelo.TipoEvento;
 
-public class InserirTipoEvento implements Acao {
+public class ExcluirTipoEvento implements Acao {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String nome = request.getParameter("nome");
-		String situacao = request.getParameter("situacao");
-		
-		TipoEvento tipo = new TipoEvento();
-		tipo.setNome(nome);
-		tipo.setSituacao("1".equals(situacao));
+		String id = request.getParameter("id_tipo_evento");
 		
 		try (Connection connection = new ConnectionFactory().getConnection()) {
-			TipoEventoDao tipoDao = new TipoEventoDao(connection);
-			tipoDao.cadastrar(tipo);
+			TipoEventoDao dao = new TipoEventoDao(connection);
+			dao.excluir(Integer.valueOf(id));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}
-		
 		return "redirect:TiposEventos";
 	}
 

@@ -1,7 +1,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:url value="entrada?acao=Eventos" var="paginaEventos" />
-<c:url value="entrada?acao=AlterarTipoEvento" var="atualizar" />
+<c:url value="entrada?acao=TiposEventos" var="paginaEventos" />
+<c:url value="entrada?acao=AlterarTipoEvento" var="alterar" />
 
 <!DOCTYPE html>
 <html lang="en">
