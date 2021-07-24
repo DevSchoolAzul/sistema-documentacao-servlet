@@ -37,7 +37,7 @@ public class Requisicoes implements Acao{
 			throw new RuntimeException(e);
 		}
 		
-		return "forward:projetos/requisicoes.jsp";
+		return "forward:requisicoes/requisition.jsp";
 	}
 
 }

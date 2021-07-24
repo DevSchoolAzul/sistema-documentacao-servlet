@@ -110,17 +110,20 @@ public class RequisicaoDao {
 		try(PreparedStatement pstm = connection.prepareStatement(sql)) {
 			pstm.execute();
 			try(ResultSet rst = pstm.getResultSet()) {
-				Requisicao requisicao = new Requisicao();
-				requisicao.setId_requisicao(rst.getInt(1));
-				requisicao.setId_evento(rst.getInt(2));
-				requisicao.setUrl_homolog(rst.getString(3));
-				requisicao.setUri_prod(rst.getString(4));
-				requisicao.setDescricao(rst.getString(5));
-				requisicao.setRequisicao_pai(rst.getInt(6));
-				requisicao.setCamada(rst.getString(7));
-				requisicao.setSituacao(rst.getBoolean(8));
-				requisicao.setOrdem(rst.getInt(9));
-				requisicoes.add(requisicao);
+				while (rst.next()) {
+					Requisicao requisicao = new Requisicao();
+					requisicao.setId_requisicao(rst.getInt(1));
+					requisicao.setId_evento(rst.getInt(2));
+					requisicao.setUrl_homolog(rst.getString(3));
+					requisicao.setUri_prod(rst.getString(4));
+					requisicao.setDescricao(rst.getString(5));
+					requisicao.setRequisicao_pai(rst.getInt(6));
+					requisicao.setCamada(rst.getString(7));
+					requisicao.setSituacao(rst.getBoolean(8));
+					requisicao.setOrdem(rst.getInt(9));
+					
+					requisicoes.add(requisicao);
+				}
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException(e);

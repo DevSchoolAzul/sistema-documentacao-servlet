@@ -21,10 +21,10 @@ public class InserirRequisicao implements Acao {
 		String parametroUrlHomolog = request.getParameter("url_homolog");
 		String parametroUriProd = request.getParameter("uri_prod");
 		String parametroDescricao = request.getParameter("descricao");
-		String parametroRequisicaoPai = request.getParameter("id_requisicao_pai");
-		String parametroCamada = request.getParameter("id_camada");
-		String parametroSituacao = request.getParameter("id_situacao");
-		String parametroOrdem = request.getParameter("id_ordem");
+		String parametroRequisicaoPai = request.getParameter("requisicao_pai");
+		String parametroCamada = request.getParameter("camada");
+		String parametroSituacao = request.getParameter("situacao");
+		String parametroOrdem = request.getParameter("ordem");
 		
 		try(Connection connection = new ConnectionFactory().getConnection()) {
 			RequisicaoDao requisicaoDao = new RequisicaoDao(connection);
@@ -33,7 +33,11 @@ public class InserirRequisicao implements Acao {
 			requisicao.setUrl_homolog(parametroUrlHomolog);
 			requisicao.setUri_prod(parametroUriProd);
 			requisicao.setDescricao(parametroDescricao);
-			requisicao.setRequisicao_pai(Integer.parseInt(parametroRequisicaoPai));
+			if ("0".equals(parametroRequisicaoPai)) {
+				requisicao.setRequisicao_pai(null);
+			} else {
+				requisicao.setRequisicao_pai(Integer.parseInt(parametroRequisicaoPai));				
+			}
 			requisicao.setCamada(parametroCamada);
 			requisicao.setSituacao("1".equals(parametroSituacao));
 			requisicao.setOrdem(Integer.parseInt(parametroOrdem));

@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.sistemaDocumentacao.connection.ConnectionFactory;
 import br.com.sistemaDocumentacao.dao.EventoDao;
+import br.com.sistemaDocumentacao.dao.RequisicaoDao;
 import br.com.sistemaDocumentacao.modelo.Evento;
+import br.com.sistemaDocumentacao.modelo.Requisicao;
 
 public class NovaRequisicao implements Acao {
 
@@ -20,14 +22,17 @@ public class NovaRequisicao implements Acao {
 			throws ServletException, IOException {
 		try (Connection connection = new ConnectionFactory().getConnection()){
 			EventoDao eventoDao = new EventoDao(connection);
+			RequisicaoDao requisicaoDao = new RequisicaoDao(connection);
 			List<Evento> eventos = eventoDao.listarEventos();
+			List<Requisicao> requisicoes = requisicaoDao.listarRequisicoes();
 			request.setAttribute("eventos", eventos);
+			request.setAttribute("requisicoesPai", requisicoes);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		return "forward:telas/new-requisition.jsp";
+		return "forward:requisicoes/new-requisition.jsp";
 	}
 
 }

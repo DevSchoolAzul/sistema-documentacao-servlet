@@ -28,7 +28,7 @@ public class EditarRequisicao implements Acao {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
-		return "forward:telas/update-requisition.jsp";
+		return "forward:requisicoes/update-requisition.jsp";
 	}
 
 }

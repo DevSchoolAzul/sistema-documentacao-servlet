@@ -23,10 +23,10 @@ public class AlterarRequisicao implements Acao {
 		String parametroUrlHomolog = request.getParameter("url_homolog");
 		String parametroUriProd = request.getParameter("uri_prod");
 		String parametroDescricao = request.getParameter("descricao");
-		String parametroRequisicaoPai = request.getParameter("id_requisicao_pai");
-		String parametroCamada = request.getParameter("id_camada");
-		String parametroSituacao = request.getParameter("id_situacao");
-		String parametroOrdem = request.getParameter("id_ordem");
+		String parametroRequisicaoPai = request.getParameter("requisicao_pai");
+		String parametroCamada = request.getParameter("camada");
+		String parametroSituacao = request.getParameter("situacao");
+		String parametroOrdem = request.getParameter("ordem");
 		
 		
 		try (Connection connection = new ConnectionFactory().getConnection()){
